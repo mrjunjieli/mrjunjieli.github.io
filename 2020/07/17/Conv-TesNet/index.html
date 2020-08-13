@@ -27,18 +27,18 @@
 <meta property="og:site_name" content="Junjie Li">
 <meta property="og:description" content="Conv-TesNet学习笔记TesNet全称是 Time-domain Audio Separation Network。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/images/TesNet.png">
-<meta property="og:image" content="http://yoursite.com/images/TesNet_flow.png">
-<meta property="og:image" content="http://yoursite.com/images/dilation.png">
-<meta property="og:image" content="http://yoursite.com/images/block.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/13/dpq939.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/13/dpqp9J.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/13/dpqCcR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/13/dpqPj1.png">
 <meta property="article:published_time" content="2020-07-17T15:08:17.000Z">
-<meta property="article:modified_time" content="2020-08-13T13:25:00.861Z">
+<meta property="article:modified_time" content="2020-08-13T13:37:14.042Z">
 <meta property="article:author" content="Junjie  Li">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="speech separation">
 <meta property="article:tag" content="TesNet">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/TesNet.png">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/08/13/dpq939.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/07/17/Conv-TesNet/">
 
@@ -141,20 +141,7 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>AboutMe</a>
 
   </li>
-        <li class="menu-item menu-item-something">
-
-    <a href="/categories/write" rel="section"><i class="fa fa-th fa-fw"></i>Something</a>
-
-  </li>
         
-            
-  <li class="menu-item menu-item-docs">
-
-    <a href="/docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a>
-
-  </li>
-
-
       
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -241,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 21:25:00" itemprop="dateModified" datetime="2020-08-13T21:25:00+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-13 21:37:14" itemprop="dateModified" datetime="2020-08-13T21:37:14+08:00">2020-08-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,10 +260,10 @@
       
         <h1 id="Conv-TesNet学习笔记"><a href="#Conv-TesNet学习笔记" class="headerlink" title="Conv-TesNet学习笔记"></a>Conv-TesNet学习笔记</h1><p>TesNet全称是 Time-domain Audio Separation Network。</p>
 <a id="more"></a>
-<h2 id="Block-diagram"><a href="#Block-diagram" class="headerlink" title="Block diagram"></a>Block diagram</h2><p>TesNet由encoder，separation和decoder组成。<br><img src="/images/TesNet.png" alt="TesNet"><br>encoder直接读取混合声的waveform，输出一个matrix，这个matrix经过separation生成两个mask（假设只有两个speaker），然后这两个mask和encoder的输出相乘，得到两个新的matrix，再输入到decoder后生成两段waveform。</p>
-<h2 id="System-flowchart"><a href="#System-flowchart" class="headerlink" title="System flowchart"></a>System flowchart</h2><p><img src="/images/TesNet_flow.png" alt=" "></p>
+<h2 id="Block-diagram"><a href="#Block-diagram" class="headerlink" title="Block diagram"></a>Block diagram</h2><p>TesNet由encoder，separation和decoder组成。<br><img src="https://s1.ax1x.com/2020/08/13/dpq939.png" alt="TesNet"><br>encoder直接读取混合声的waveform，输出一个matrix，这个matrix经过separation生成两个mask（假设只有两个speaker），然后这两个mask和encoder的输出相乘，得到两个新的matrix，再输入到decoder后生成两段waveform。</p>
+<h2 id="System-flowchart"><a href="#System-flowchart" class="headerlink" title="System flowchart"></a>System flowchart</h2><p><img src="https://s1.ax1x.com/2020/08/13/dpqp9J.png" alt=" "></p>
 <h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>mixture waveform 首先作为input进入encoder中（将mixture看成是一个vector），encoder对该vector进行1D卷积操作生成output。</p>
-<h3 id="Separation"><a href="#Separation" class="headerlink" title="Separation"></a>Separation</h3><p>encoder 的output进入separation之后首先进行normalization，然后进行1*1卷积操作。之后是多层1-d卷积操作，不同层的CNN读取vector的操作不同，这里使用的是dilated convolutional blocks。<br><img src="/images/dilation.png" alt=" "><br>之后对这些不同的1-Dconv block重复搭建，最终将每个block的输出相加经过relu等操作产生masks，这些masks再和encoder 的输出对应元素相乘，输入到decoder。<br>关于每个1-Dconv block的结构如下图。1-Dconv block有两条路径输出，一条是skip connection path，每个block的skip connection输出相加之和用作这个separation的输出结果。另一条residual path，每个block的residual path的输出都作为下一个block 的输入。<br><img src="/images/block.png" alt=""></p>
+<h3 id="Separation"><a href="#Separation" class="headerlink" title="Separation"></a>Separation</h3><p>encoder 的output进入separation之后首先进行normalization，然后进行1*1卷积操作。之后是多层1-d卷积操作，不同层的CNN读取vector的操作不同，这里使用的是dilated convolutional blocks。<br><img src="https://s1.ax1x.com/2020/08/13/dpqCcR.png" alt=" "><br>之后对这些不同的1-Dconv block重复搭建，最终将每个block的输出相加经过relu等操作产生masks，这些masks再和encoder 的输出对应元素相乘，输入到decoder。<br>关于每个1-Dconv block的结构如下图。1-Dconv block有两条路径输出，一条是skip connection path，每个block的skip connection输出相加之和用作这个separation的输出结果。另一条residual path，每个block的residual path的输出都作为下一个block 的输入。<br><img src="https://s1.ax1x.com/2020/08/13/dpqPj1.png" alt=""></p>
 <h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>目前理解decoder为一种类似于解卷积的操作，实际可能更复杂一点。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8707065" target="_blank" rel="noopener">Conv-TasNet: Surpassing Ideal Time-Frequency Magnitude Masking for Speech Separation</a><br>[2] <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_DLHLP20.html" target="_blank" rel="noopener">Deep Learning for Human Language Processing</a> </p>
 
