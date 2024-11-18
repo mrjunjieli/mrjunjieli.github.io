@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片展示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1000px; /* 4个图片宽度+3个间距 (4*200px + 3*10px) */
+        }
+        .gallery img {
+            flex: 1 0 230px;
+            width: 230px; /* 设置图片宽度 */
+            height: 230px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <img src="1.jpg" alt="图片1">
+        <img src="2.jpg" alt="图片2">
+        <img src="3.jpg" alt="图片3">
+        <img src="4.jpg" alt="图片4">
+        <!-- 添加更多图片 -->
+    </div>
+</body>
+</html>
