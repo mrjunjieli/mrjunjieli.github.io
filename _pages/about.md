@@ -38,7 +38,7 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 # 📝 Publications
 
 ## 2024 
-- MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues [[demo]](../demo_page/MoMuSE/index.html) 
+- **<u>Li Junjie</u>**, Zhang Ke, Wang Shuai, et al. MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues [[demo]](../demo_page/MoMuSE/index.html) 
 - Zhang Ke, **<u>Li Junjie</u>**, et al. Multi-Level Speaker Representation for Target Speaker Extraction(submitted to ICASSP2025)
 - **<u>Li Junjie</u>**, Zhang Ke, Wang Shuai, Li Haizhou, Mak Man-Wai, Lee Kong Aik "On the effectiveness of enrollment speech augmentation for Target Speaker Extraction." arXiv preprint arXiv:2409.09589 (2024).(accepted by SLT2024) [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
 - Wang Jiahe, Wang Shuai,  **<u>Li Junjie</u>**, et al. ENHANCING SPEAKER EXTRACTION THROUGH RECTIFYING TARGET CONFUSION (accepted by SLT2024) [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
@@ -74,6 +74,7 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - 2021-2022 Honda Kiyoshi’s Advanced Speech Science Award [[pdf]](../pdf/hongda.pdf)
 
 # 😄 Academic Activities
+- 2024.12 SLT 2024, Macao, China [[Image]]()
 - 2024.11. 深圳大湾区学术论坛 [[Image]](../images/haizhou_birthday/index.html)
 - 2024.08 [PolyU Research Student Conference](https://events.polyu.edu.hk/prsc2024/home) [[Image]](../images/PRSC/index.html)
 - 2024.04 Attending ICASSP 2024, Korea. [[Image]](../images/icassp2024/index.html)
@@ -84,6 +85,9 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 
 # ✅ Blog
 - [Summary of Speaker-realted tasks][![](https://img.shields.io/github/stars/mrjunjieli/awesome_speaker?style=social&label=Code+Stars)](https://github.com/mrjunjieli/awesome_speaker)
+
+# Reviewer 
+- IEEE The International Conference on Acoustics, Speech, & Signal Processing (ICASSP) 2025 
 
 <!-- 
 # 🔥 News
