@@ -23,7 +23,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Junjie LI"
   avatar           : "images/Junjie.jpg"
-  bio              : "[Curriculum Vitae]"
+  bio              : "Fake it until you make it"
   location         : "Hong Kong SAR, China"
   employer         :
   pubmed           : 
@@ -56,7 +56,7 @@ author:
   weibo            :
   xing             :
   youtube          :
-  wikipedia        : ../images/wechat.jpg
+  wikipedia        : 
 
 
 # Reading Files

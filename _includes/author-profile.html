@@ -10,7 +10,8 @@
 
   <div class="author__content">
     <h3 class="author__name">{{ author.name }}</h3>
-    {% if author.bio %}<a href="../pdf/CV_En.pdf"><p class="author__bio">{{ author.bio }}</p></a>{% endif %}
+    <!-- {% if author.bio %}<a href="../pdf/CV_En.pdf"><p class="author__bio">{{ author.bio }}</p></a>{% endif %} -->
+    {% if author.bio %}<p class="author__bio">{{ author.bio }}</p></a>{% endif %}
   </div>
 
   <div class="author__urls-wrapper">
