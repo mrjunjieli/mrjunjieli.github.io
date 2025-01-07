@@ -25,7 +25,7 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 
 
 # 📖 Educations
-- 2024.05 - present, Ph.D. candidate in epartment of Electrical and Eletronic Engineering,  The Hong Kong Polytechnic University, Hong Kong SAR. 
+- 2024.05 - present, Ph.D. candidate in Department of Electrical and Eletronic Engineering,  The Hong Kong Polytechnic University, Hong Kong SAR. 
 - 2020.09 - 2023.03, M.E. in College of Intellgence and Computing, Tianjin University, Tianjin. 
 - 2016-09 - 2020.06, B.E. in School of Computer Science and Technology, Tiangong University (Tianjin Polytechnic University), Tianjin. 
 
@@ -63,6 +63,7 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 
 # 💻 Open Source Toolkit
 - WeSep [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
+- WeSpeaker [![](https://img.shields.io/github/stars/wenet-e2e/wespeaker?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wespeaker)
 
 # 🎖 Honors and Awards
 - 2016-2017 President’s Scholarship Second Class (top 7%) [[pdf]](../pdf/Award_Scholarship_2nd.pdf)
@@ -83,8 +84,9 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - 2023.12 International Workshop on Mathematical Issues in Information Sciences 2023, CUHK(SZ). [[Image]](../images/MIIS2023/index.html)
 - 2023.12 CHINA HI-TECH Forum 2023, Shenzhen. [[Image]](../images/HITECH2023/index.html)
 
-# ✅ Blog
+# 💬 Blog
 - [Summary of Speaker-realted tasks][![](https://img.shields.io/github/stars/mrjunjieli/awesome_speaker?style=social&label=Code+Stars)](https://github.com/mrjunjieli/awesome_speaker)
+- [Personal Blog](https://awesome-speaker.github.io/)
 
 # Reviewer 
 - IEEE The International Conference on Acoustics, Speech, & Signal Processing (ICASSP) 2025 
