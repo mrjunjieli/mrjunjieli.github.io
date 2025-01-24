@@ -40,20 +40,30 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 
 # 📝 Publications
 
-## 2024 
+## Speaker verification 
+
+
+## Speech Separation 
 - **<u>Li Junjie</u>**, Zhang Ke, Wang Shuai, et al. "MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues". [[demo]](../demo_page/MoMuSE/index.html) 
+
 - Zhang Ke, **<u>Li Junjie</u>**, et al. "Multi-Level Speaker Representation for Target Speaker Extraction".
-- **<u>Li Junjie</u>**, Zhang Ke, Wang Shuai, et al.  "On the effectiveness of enrollment speech augmentation for Target Speaker Extraction". [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
-- Wang Jiahe, Wang Shuai,  **<u>Li Junjie</u>**, et al. ENHANCING SPEAKER EXTRACTION THROUGH RECTIFYING TARGET CONFUSION [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
-- Wang Shuai, Zhang Ke, Lin Shaoxiong, **<u>Li Junjie</u>**, et al. (2024) WeSep: A Scalable and Flexible Toolkit Towards Generalizable Target Speaker Extraction.  [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
-- Yang Hongli, Chen Xinyi, **<u>Li Junjie</u>**, et al. Listen to the Speaker in Your Gaze
-- Tao Ruijie, Qian Xinyuan,Jiang Yidi, **<u>Li Junjie</u>**, et al.  Audio-Visual Target Speaker Extraction with Selective Auditory Attention 
+
+- **<u>Li, J.</u>**, Zhang, K., Wang, S., Li, H., Mak, M. W., & Lee, K. A. (2024, December). On the effectiveness of enrollment speech augmentation for Target Speaker Extraction. In 2024 IEEE Spoken Language Technology Workshop (SLT) (pp. 325-332). IEEE. [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
+
+- Wang, J., Wang, S., **<u>Li, J.</u>**, Zhang, K., Qian, Y., & Li, H. (2024, December). Enhancing Speaker Extraction Through Rectifying Target Confusion. In 2024 IEEE Spoken Language Technology Workshop (SLT) (pp. 349-356). IEEE.[![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
+
+- Wang, S., Zhang, K., Lin, S., **<u>Li, J.</u>**, Wang, X., Ge, M., ... & Li, H. (2024). WeSep: A Scalable and Flexible Toolkit Towards Generalizable Target Speaker Extraction. In Proc. Interspeech 2024 (pp. 4273-4277).[![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
+
+- Yang, H., Chen, X., **<u>Li, J.</u>**, Huang, H., Cai, S., & Li, H. (2024, August). Listen to the Speaker in Your Gaze. In 2024 IEEE International Conference on Cybernetics and Intelligent Systems (CIS) and IEEE International Conference on Robotics, Automation and Mechatronics (RAM) (pp. 380-385). IEEE.
+
+- R. Tao, X. Qian, Y. Jiang, **<u>J. Li</u>**, J. Wang and H. Li, "Audio-Visual Target Speaker Extraction with Selective Auditory Attention," in IEEE Transactions on Audio, Speech and Language Processing, doi: 10.1109/TASLPRO.2025.3527766.
+
 - **<u>Li Junjie</u>**, Tao Ruijie, Ge Meng, et al. “Audio-Visual Active Speaker Extraction for Sparsely Overlapped Multi-talker
 Speech,” *ICASSP 2024*, pp. 10666-10670.   [![](https://img.shields.io/github/stars/mrjunjieli/ActiveExtract?style=social&label=Code+Stars)](https://github.com/mrjunjieli/ActiveExtract) [[Demo]](https://activeextract.github.io/) 
 
-## Before
 - Wang Honglong, Fu Yanjie,**<u>Li Junjie</u>**, et al. ”Stream Attention Based U-Net for L3DAS23
 Challenge,” ICASSP 2023, pp. 1-2, doi: 10.1109/ICASSP49357.2023.10095854.
+
 - **<u>Li Junjie</u>**, Ge Meng, et al. Rethinking the Visual Cues in Audio-Visual Speaker Extraction. Proc. INTER-
 SPEECH 2023, 3754-3758, doi: 10.21437/Interspeech.2023-2545. [![](https://img.shields.io/github/stars/mrjunjieli/DAVSE?style=social&label=Code+Stars)](https://github.com/mrjunjieli/DAVSE)
 - **<u>Li Junjie</u>**, Ge Meng, et al. ”Deep Multi-task Cascaded Acoustic Echo Cancellation and Noise Suppres-
@@ -62,6 +72,7 @@ sion,” 2022 13th ISCSLP, pp. 130-134, doi: 10.1109/ISCSLP57327.2022.10037852. 
 INTERSPEECH 2022, 906-910, doi: 10.21437/Interspeech.2022-11183. [![](https://img.shields.io/github/stars/mrjunjieli/LRS3_for_AVSS?style=social&label=Code+Stars)](https://github.com/mrjunjieli/LRS3_for_AVSS)
 - **<u>Li Junjie</u>** and Liu Ding, “Information bottleneck theory on convolutional neural networks,” Neural Pro-
 cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://img.shields.io/github/stars/mrjunjieli/IB_ON_CNN?style=social&label=Code+Stars)](https://github.com/mrjunjieli/IB_ON_CNN)
+
 
 # 💻 Open Source Toolkit
 - WeSep [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
