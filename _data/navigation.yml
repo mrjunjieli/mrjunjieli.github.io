@@ -23,5 +23,7 @@ main:
   
   - title: "Blog"
     urt: "/#-blog"
-
+  
+  - title: "Reviewer"
+    url: "/#-reviewer"
 
