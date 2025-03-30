@@ -24,6 +24,7 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 
 
 # 🔥 News
+- 2025.03: &nbsp;🎉🎉 "MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues" has been accepted by ICME2025!
 - 2025.02: &nbsp;🎉🎉 Xi-vector has been open sourced in Wespeaker toolkit [[404]](https://github.com/wenet-e2e/wespeaker/pull/404). 
 - 2025.01: &nbsp;🎉🎉 "Audio-Visual Target Speaker Extraction with Selective Auditory Attention" has been accepted by TASLP [[pdf]](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10835186)
 
