@@ -91,7 +91,7 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - 2021-2022 Honda Kiyoshi’s Advanced Speech Science Award
 
 # 😄 Academic Activities
-- 2025.06 - 2025.07 ICME 2025[[Image]](../images/ICME2025/index.html)
+- 2025.06 - 2025.07 ICME 2025 Nantes, France. [[Image]](../images/ICME2025/index.html)
 - 2024.09 - 2024.12 Teaching Assistant for EIE 3312 Linear Systems. 
 - 2024.12 SLT 2024, Macao, China [[Image]](../images/SLT2024/index.html)
 - 2024.11. 深圳大湾区学术论坛 [[Image]](../images/haizhou_birthday/index.html)
