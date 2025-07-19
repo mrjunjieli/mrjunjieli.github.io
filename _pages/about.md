@@ -47,6 +47,7 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 
 
 ## Speech Separation 
+- MeMo [[demo]](../demo_page/MeMo/index.html) 
 - **<u>Li Junjie</u>**, Zhang Ke, Wang Shuai, et al. "MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues". [[demo]](../demo_page/MoMuSE/index.html) 
 
 - Zhang Ke, **<u>Li Junjie</u>**, et al. Multi-level speaker representation for target speaker extraction. In ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
