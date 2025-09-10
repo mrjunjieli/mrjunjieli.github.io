@@ -44,7 +44,7 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 # 📝 Publications
 
 ## Speaker verification 
-
+- xi+: uncertainty supervision for robust speaker embedding
 
 ## Speech Separation 
 - MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions [[demo]](../demo_page/MeMo/index.html) 
@@ -77,6 +77,8 @@ INTERSPEECH 2022, 906-910, doi: 10.21437/Interspeech.2022-11183. [![](https://im
 - **<u>Li Junjie</u>** and Liu Ding, “Information bottleneck theory on convolutional neural networks,” Neural Pro-
 cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://img.shields.io/github/stars/mrjunjieli/IB_ON_CNN?style=social&label=Code+Stars)](https://github.com/mrjunjieli/IB_ON_CNN)
 
+## NLP
+- Do We Really Need GNNs with Explicit Structural Modeling? MLPs Suffice for Language Model Representations
 
 # 💻 Open Source Toolkit
 - WeSep [![](https://img.shields.io/github/stars/wenet-e2e/wesep?style=social&label=Code+Stars)](https://github.com/wenet-e2e/wesep)
