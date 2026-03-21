@@ -45,6 +45,7 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 # 📝 Publications
 
 ## Speaker verification 
+- 
 - xi+: uncertainty supervision for robust speaker embedding
 
 ## Speech Separation 
@@ -95,6 +96,8 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - 2021-2022 Honda Kiyoshi’s Advanced Speech Science Award
 
 # 😄 Academic Activities
+- 2025.12 - 2026.05 Teaching Assistant for EIE 3312 Linear Systems.
+- 2025.11 声纹研讨会 (深圳)
 - 2025.06 - 2025.07 ICME 2025 Nantes, France. [[Image]](../images/ICME2025/index.html)
 - 2024.09 - 2024.12 Teaching Assistant for EIE 3312 Linear Systems. 
 - 2024.12 SLT 2024, Macao, China [[Image]](../images/SLT2024/index.html)
@@ -110,6 +113,8 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - Summary of Speaker-realted tasks[![](https://img.shields.io/github/stars/mrjunjieli/awesome_speaker?style=social&label=Code+Stars)](https://github.com/mrjunjieli/awesome_speaker)
 
 # Reviewer 
+- IEEE Transactions on Cognitive and Developmental Systems 2026
+- IEEE The International Conference on Acoustics, Speech, \& Signal Processing (ICASSP) 2026
 - IEEE The International Conference on Acoustics, Speech, & Signal Processing (ICASSP) 2025 [[pdf]](../pdf/ICASSP_Reviewer_Certificates.pdf)
 - IEEE International Conference on Multimedia & Expo 2025 [[pdf]](../pdf/ICME_attendence.pdf)
 - The 17th Asia Pacific Signal and Information Processing Association Annual Summit and Conference, October 22nd–24th 2025, Shangri-la, Singapore
