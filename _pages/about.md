@@ -25,8 +25,9 @@ My research interest includes Speech Separation, Text to Speech and Speaker-rela
 
 
 # 🔥 News
-- 2026.01: &nbsp;🎉🎉 "xi+: uncertainty supervision for robust speaker embedding" has been accepted by ICASSP2026 ! [[pdf]](https://arxiv.org/abs/2509.05993)
-- 2025.03: &nbsp;🎉🎉 "MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues" has been accepted by ICME2025! [[pdf]]([https://arxiv.org/pdf/2412.08247v2](https://ieeexplore.ieee.org/iel8/11208895/11208897/11209435.pdf))
+- 2026.06: &nbsp;🎉🎉 "MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions" has been accepted by TASLP 
+- 2026.01: &nbsp;🎉🎉 "xi+: uncertainty supervision for robust speaker embedding" has been accepted by ICASSP2026 ! [[pdf]](https://ieeexplore.ieee.org/abstract/document/11463369)
+- 2025.03: &nbsp;🎉🎉 "MoMuSE: Momentum Multi-modal target Speaker Extraction for scenarios with impaired visual cues" has been accepted by ICME2025! [[pdf]](https://scholar.google.com.hk/citations?view_op=view_citation&hl=zh-CN&user=CInvjq8AAAAJ&citation_for_view=CInvjq8AAAAJ:Se3iqnhoufwC)
 - 2025.02: &nbsp;🎉🎉 Xi-vector has been open sourced in Wespeaker toolkit [[404]](https://github.com/wenet-e2e/wespeaker/pull/404). 
 - 2025.01: &nbsp;🎉🎉 "Audio-Visual Target Speaker Extraction with Selective Auditory Attention" has been accepted by TASLP [[pdf]](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10835186)
 
@@ -96,6 +97,7 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - 2021-2022 Honda Kiyoshi’s Advanced Speech Science Award
 
 # 😄 Academic Activities
+- 2026.05 ICASSP 2026 Bacelona, Spain. 
 - 2025.12 - 2026.05 Teaching Assistant for EIE 3312 Linear Systems.
 - 2025.11 声纹研讨会 (深圳)
 - 2025.06 - 2025.07 ICME 2025 Nantes, France. [[Image]](../images/ICME2025/index.html)
@@ -109,8 +111,6 @@ cessing Letters, vol. 53, no. 2, pp. 1385–1400, 2021. (JCR Q3)  [![](https://i
 - 2023.12 International Workshop on Mathematical Issues in Information Sciences 2023, CUHK(SZ). [[Image]](../images/MIIS2023/index.html)
 - 2023.12 CHINA HI-TECH Forum 2023, Shenzhen. [[Image]](../images/HITECH2023/index.html)
 
-# 💬 Blog
-- Summary of Speaker-realted tasks[![](https://img.shields.io/github/stars/mrjunjieli/awesome_speaker?style=social&label=Code+Stars)](https://github.com/mrjunjieli/awesome_speaker)
 
 # Reviewer 
 - IEEE Transactions on Cognitive and Developmental Systems 2026
