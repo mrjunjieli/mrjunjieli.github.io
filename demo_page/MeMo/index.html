@@ -1,688 +1,357 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<script src="https://www.google.com/jsapi" type="text/javascript"></script>
-	<script type="text/javascript">google.load("jquery", "1.3.2");</script>
-	<!-- <link rel="stylesheet" href="./static/css/bulma.min.css"> -->
-	<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-	<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-	<!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
-	<!-- <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"> -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions</title>
+
+	<meta property="og:title" content="MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions" />
+	<meta property="og:image" content="./images/paper.png" />
+	<meta name="description" content="MeMo introduces attentional momentum via two adaptive memory banks, keeping audio-visual target speaker extraction robust even when visual cues are missing or degraded." />
+
+	<link rel="icon" type="image/png" href="./images/logo.png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./static/css/index.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script defer src="./static/js/fontawesome.all.min.js"></script>
-	<script src="./static/js/bulma-carousel.min.js"></script>
-	<script src="./static/js/bulma-slider.min.js"></script>
-	<script src="./static/js/index.js"></script>
-	<script>(function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s); js.id = id;
-			js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-	<script>window.twttr = (function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0],
-				t = window.twttr || {};
-			if (d.getElementById(id)) return t;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js, fjs);
-
-			t._e = [];
-			t.ready = function (f) {
-				t._e.push(f);
-			};
-
-			return t;
-		}(document, "script", "twitter-wjs"));</script>
-	<style type="text/css">
-		body {
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-			font-weight: 300;
-			font-size: 18px;
-			margin-left: auto;
-			margin-right: auto;
-			width: 1100px;
-		}
-
-		h1 {
-			font-size: 32px;
-			font-weight: 300;
-		}
-
-		.disclaimerbox {
-			background-color: #eee;
-			border: 1px solid #eeeeee;
-			border-radius: 10px;
-			-moz-border-radius: 10px;
-			-webkit-border-radius: 10px;
-			padding: 20px;
-		}
-
-		video.header-vid {
-			height: 140px;
-			border: 1px solid black;
-			border-radius: 10px;
-			-moz-border-radius: 10px;
-			-webkit-border-radius: 10px;
-		}
-
-		img.header-img {
-			height: 140px;
-			border: 1px solid black;
-			border-radius: 10px;
-			-moz-border-radius: 10px;
-			-webkit-border-radius: 10px;
-		}
-
-		img.rounded {
-			border: 1px solid #eeeeee;
-			border-radius: 10px;
-			-moz-border-radius: 10px;
-			-webkit-border-radius: 10px;
-		}
-
-		a:link,
-		a:visited {
-			color: #1367a7;
-			text-decoration: none;
-		}
-
-		a:hover {
-			color: #208799;
-		}
-
-		td.dl-link {
-			height: 160px;
-			text-align: center;
-			font-size: 22px;
-		}
-
-		code {
-			display: block;
-			white-space: pre-wrap font-family: Consolas, "courier new";
-			color: crimson;
-			background-color: #f1f1f1;
-			padding: 2px;
-			font-size: 105%;
-		}
-
-		pre {
-			font-family: monospace;
-		}
-
-		.layered-paper-big {
-			/* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
-			box-shadow:
-				0px 0px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The top layer shadow */
-				5px 5px 0 0px #fff,
-				/* The second layer */
-				5px 5px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The second layer shadow */
-				10px 10px 0 0px #fff,
-				/* The third layer */
-				10px 10px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The third layer shadow */
-				15px 15px 0 0px #fff,
-				/* The fourth layer */
-				15px 15px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The fourth layer shadow */
-				20px 20px 0 0px #fff,
-				/* The fifth layer */
-				20px 20px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The fifth layer shadow */
-				25px 25px 0 0px #fff,
-				/* The fifth layer */
-				25px 25px 1px 1px rgba(0, 0, 0, 0.35);
-			/* The fifth layer shadow */
-			margin-left: 10px;
-			margin-right: 45px;
-		}
-
-		.paper-big {
-			/* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
-			box-shadow:
-				0px 0px 1px 1px rgba(0, 0, 0, 0.35);
-			/* The top layer shadow */
-
-			margin-left: 10px;
-			margin-right: 45px;
-		}
-
-
-		.layered-paper {
-			/* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
-			box-shadow:
-				0px 0px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The top layer shadow */
-				5px 5px 0 0px #fff,
-				/* The second layer */
-				5px 5px 1px 1px rgba(0, 0, 0, 0.35),
-				/* The second layer shadow */
-				10px 10px 0 0px #fff,
-				/* The third layer */
-				10px 10px 1px 1px rgba(0, 0, 0, 0.35);
-			/* The third layer shadow */
-			margin-top: 5px;
-			margin-left: 10px;
-			margin-right: 30px;
-			margin-bottom: 5px;
-		}
-
-		.vert-cent {
-			position: relative;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-
-		hr {
-			border: 0;
-			height: 1px;
-			background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-		}
-	</style>
-
-	<html>
-
-	<head>
-		<title>MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions
-		</title>
-		<meta property="og:image" content="./images/paper.png" />
-		<!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
-		<meta property="og:title"
-			content="MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions" />
-
-		<script async src=""></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() { dataLayer.push(arguments); }
-			gtag('js', new Date());
-
-			gtag('config', 'UA-75863369-6');
-		</script>
-		<link rel="icon" type="image/png"
-			href="./images/logo.png" />
-		<script async defer src="https://buttons.github.io/buttons.js"></script>
-	</head>
+	<!-- author analytics (kept from original) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75863369-6"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
 
 <body>
-	<div class="container">
-		<div class="center-content">
-			<br>
-			<span style="font-size:36px">MeMo: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions</span>
-			<br>
-			<!-- <span style="font-size:20px; color:#011B56;">━ <a href="https://openreview.net/pdf?id=rzx3vcvlzj">ICLR 2025</a> ━</span> -->
-			<br>
-			<div class="author-list">
-				<div class="author-item">
-					<span style="font-size:22px"><a href="https://mrjunjieli.github.io/">Junjie Li*</a></span>
-				</div>
-				<div class="author-item">
-					<span style="font-size:22px"><a href="https://alexwxwu.github.io/">Wenxuan Wu*</a></span>
-				</div>
-				<div class="author-item">
-					<span style="font-size:22px"><a href="https://shuaiwang-nju.github.io/">Shuai Wang+</a></span>
 
-				</div>
-				<div class="author-item">
-					<span style="font-size:22px">Zexu Pan</span>
-				</div>
-                <div class="author-item">
-					<span style="font-size:22px">Kong Aik Lee</span>
-				</div>
-                <div class="author-item">
-					<span style="font-size:22px">Helen Meng</span>
-				</div>
-                <div class="author-item">
-					<span style="font-size:22px">Haizhou Li</span>
-				</div>
-			</div>
-			<div class="center-content">
-				<span style="font-size:15px">*: Equal contribution.</span> <br>
-				<span style="font-size:15px">+: Coressponding author.</span> <br>
-                <span style="font-size:15px">The Hong Kong Polytechnic University, Hong Kong SAR</span> <br> 
-                <span style="font-size:15px">The Chinese University of Hong Kong, Shenzhen (CUHK-Shenzhen)</span> <br>
-				<span style="font-size:15px">The Chinese University of Hong Kong, Hong Kong SAR</span>
-			</div>
-			<div class="links-section">
-				<span style="font-size:22px"><a href='https://arxiv.org/pdf/2507.15294'>[arXiv 📝]</a></span>
-				<span style="font-size:22px"><a href='https://github.com/mrjunjieli/MeMo'>[code ⚙️]</a></span>
+	<!-- ===================== NAVBAR ===================== -->
+	<nav class="nav">
+		<div class="nav-inner">
+			<a class="brand" href="#top">
+				<img src="./images/logo.png" alt="MeMo logo" />
+				<span>MeMo</span>
+			</a>
+			<div class="nav-links">
+				<a href="#abstract">Abstract</a>
+				<a href="#method">Method</a>
+				<a href="#data">Data</a>
+				<a href="#results">Results</a>
+				<a href="#demo">Demo</a>
+				<a href="https://arxiv.org/pdf/2507.15294">Paper</a>
 			</div>
 		</div>
+	</nav>
+
+	<!-- ===================== HERO ===================== -->
+	<header class="hero" id="top">
+		<img class="hero-logo" src="./images/logo.png" alt="MeMo" />
+		<div class="venue">IEEE TASLP &nbsp;·&nbsp; 2026</div>
+		<h1><span class="mk">MeMo</span>: Attentional Momentum for Real-time Audio-visual Speaker Extraction under Impaired Visual Conditions</h1>
+		<p class="subtitle">Look once to hear — keep attention on the target speaker even when visual cues vanish.</p>
+
+		<div class="authors">
+			<a href="https://mrjunjieli.github.io/">Junjie Li<sup>*</sup></a>
+			<a href="https://alexwxwu.github.io/">Wenxuan Wu<sup>*</sup></a>
+			<a href="https://shuaiwang-nju.github.io/">Shuai Wang<sup>†</sup></a>
+			<span>Zexu Pan</span>
+			<span>Kong Aik Lee</span>
+			<span>Helen Meng</span>
+			<span>Haizhou Li</span>
+		</div>
+		<div class="affil">
+			The Hong Kong Polytechnic University &nbsp;·&nbsp; The Chinese University of Hong Kong, Shenzhen &nbsp;·&nbsp; The Chinese University of Hong Kong<br>
+			<span class="note">* Equal contribution &nbsp;&nbsp; † Corresponding author</span>
+		</div>
+
+		<div class="btns">
+			<a class="btn btn-primary" href="https://arxiv.org/pdf/2507.15294">📝&nbsp; arXiv Paper</a>
+			<a class="btn btn-ghost" href="https://github.com/mrjunjieli/MeMo">⚙️&nbsp; Code</a>
+			<a class="btn btn-ghost" href="#demo">🎧&nbsp; Listen to Demos</a>
+		</div>
+	</header>
+
+	<!-- ===================== TAGLINE ===================== -->
+	<div class="tagline">
+		<p><span class="hl">MeMo</span> is a <span class="em">generalizable concept</span> that plugs into various model architectures —
+		it consistently keeps attention on the target speaker <span class="em">even without visual information</span>.</p>
 	</div>
-	<script type="text/javascript" src="script.js"></script>
-	<center>
-		<img class="round" style="width:200px" src="./images/logo.png" />
-		<p class="abstract-intro">
-			<span class="highlight">MeMo</span> is a <span class="blue-text">generalizable concept</span> that can be integrated into various
-model architectures.
-			<span class="green-text">It could consistantly keep attention on target speaker even without visual information.</span>
-		</p>
-	</center>
-	<hr>
-	<div class="container">
-		<h1 class="center-content">Abstract</h1>
-		<div class="abstract">
-            Audio-visual Target Speaker Extraction (AV-TSE) aims to isolate a target speaker&apos;s voice from multi-speaker environments
-            by leveraging visual cues as guidance. <span class="highlight">However, the performance of AV-TSE systems heavily relies on the quality of these
-             visual cues. In extreme scenarios where visual cues are missing or severely degraded, the system may fail to accurately 
-             extract the target speaker.</span> In contrast, humans can maintain attention on a target speaker even in the absence of explicit 
-             auxiliary information. Motivated by such human cognitive ability, we propose a novel framework called <i>MeMo</i>, which incorporates 
-             two adaptive memory banks to store attention-related information. <span class="blue-text"><i>MeMo</i> is specifically designed for real-time scenarios: 
-             once initial attention is established, the system maintains attentional momentum over time, even when visual cues become unavailable.</span>
-              We conduct comprehensive experiments to verify the effectiveness of <i>MeMo</i>. Experimental results demonstrate that our proposed 
-              framework achieves SI-SNR improvements of at least <b>2</b>  dB over the corresponding baseline.
-		</div>
-	</div>
-	<br>
-    
 
-	<center>
-		<table align=center width=850px>
-			<tr>
-				<td width=260px>
-					<center>
-						<img class="round" style="width:1000px" src="./images/MeMo.jpg" />
-					</center>
-				</td>
-			</tr>
-		</table>
-		<table align=center width=850px>
-			<tr>
-				<td>
-					<center>
-		 Fig.1: Overview of <a style="color:rgb(255, 136, 0);">MeMo</a> framework. MeMo consists of two types of adaptive memory banks: speaker bank and contextual bank. 
-					</center>
-				</td>
-			</tr>
-		</table>
-	</center>
-	<hr>
-
-    <center>
-		<table align=center width=700px>
-			<tr>
-				<td width=150px>
-					<center>
-						<img class="round" style="width:600px" src="./images/att_mo.jpg" />
-					</center>
-				</td>
-			</tr>
-		</table>
-		<table align=center width=850px>
-			<tr>
-				<td>
-					<center>
-                        Fig.2: The overall pipeline of Attentional Momentum during inference stage. In the first stage, only visual cues are utilized. But in the next stages, the estimated speech from the last stage is also could be utilized. 
-                        Hence, even visual cues are missed, MeMo is still able to maintain attention on the target speaker.
-
-					</center>
-				</td>
-			</tr>
-		</table>
-	</center>
-	<hr>
-
-	<center>
-        
-        <div class="results-section">
-			<h1 class="center-content">Data Simulation</h1>
-			<div class="center-content">
-				<img class="round" style="width: 1000px" src="./images/data.jpg">
-				<figcaption>Fig 3: Examples of visual impairments.
-				</figcaption>
-			</div>
-            <div class="center-content">
-				<img class="round" style="width: 800px" src="./images/switch_new.jpg">
-				<figcaption>Fig 4: An example of target speaker switching during a con-
-versation is illustrated in this figure. Attention shifts from one
-target speaker to another at a certain point, while interfering
-speech or background noise persists.
-				</figcaption>
+	<!-- ===================== ABSTRACT ===================== -->
+	<section id="abstract">
+		<div class="wrap">
+			<div class="eyebrow">Overview</div>
+			<h2 class="section-title">Abstract</h2>
+			<div class="abstract-card">
+				Audio-visual Target Speaker Extraction (AV-TSE) aims to isolate a target speaker's voice from
+				multi-speaker environments by leveraging visual cues as guidance.
+				<span class="mark">However, the performance of AV-TSE systems heavily relies on the quality of these visual cues.
+				In extreme scenarios where visual cues are missing or severely degraded, the system may fail to accurately
+				extract the target speaker.</span>
+				In contrast, humans can maintain attention on a target speaker even in the absence of explicit auxiliary
+				information. Motivated by such human cognitive ability, we propose a novel framework called <b>MeMo</b>, which
+				incorporates two adaptive memory banks to store attention-related information.
+				<b>MeMo</b> is specifically designed for real-time scenarios: once initial attention is established, the system
+				maintains <b>attentional momentum</b> over time, even when visual cues become unavailable. Comprehensive
+				experiments show that our framework achieves SI-SNR improvements of at least <b>2&nbsp;dB</b> over the
+				corresponding baseline.
 			</div>
 		</div>
-        <hr>
+	</section>
 
+	<!-- ===================== METHOD ===================== -->
+	<section id="method">
+		<div class="wrap">
+			<div class="eyebrow">How it works</div>
+			<h2 class="section-title">Method</h2>
+			<p class="section-sub">Two adaptive memory banks — a <em>speaker bank</em> and a <em>contextual bank</em> —
+			turn the model's own past outputs into a persistent attention signal.</p>
 
-		<div class="results-section">
-			<h1 class="center-content">Results on Online Speech Separation</h1>
-			<div class="center-content">
-				<img class="round" style="width: 1000px" src="./images/results1.jpg">
-				<figcaption>
-					Comparative Results between Contextual Bank and Speaker Bank. 
-				</figcaption>
-			</div>
-			<div class="center-content">
-				<img class="round" style="width: 600px" src="./images/results2.jpg">
-				<figcaption>
-					The performance of different systems on different impaired ratios in online mode.
-				</figcaption>
-			</div>
-            <div class="center-content">
-				<img class="round" style="width: 800px" src="./images/results3.jpg">
-				<figcaption>
-					Performance comparisons of MeMo and other existing separation models. 
-				</figcaption>
-			</div>
-            <div class="center-content" style="display: flex; justify-content: space-between; gap: 20px;">
-                <div style="flex: 1;">
-                    <img class="round" style="width: 100%" src="./images/results4.jpg">
-                    <figcaption>
-					Performance under different visual impairments. 
-				</figcaption>
-                </div>
-            
-                <div style="flex: 1;">
-                    <img class="round" style="width: 100%" src="./images/results5.jpg">
-                    <figcaption>
-					Performance under switching dataset. 
-				</figcaption>
-                </div>
-                </div>
-            </div>
+			<figure class="figure">
+				<img src="./images/MeMo.jpg" alt="MeMo framework overview" />
+				<figcaption><b>Fig. 1:</b> Overview of the <span class="mk">MeMo</span> framework. MeMo consists of two types of adaptive
+				memory banks: the speaker bank and the contextual bank.</figcaption>
+			</figure>
+
+			<figure class="figure">
+				<img src="./images/att_mo.jpg" alt="Attentional momentum pipeline" />
+				<figcaption><b>Fig. 2:</b> The overall pipeline of <span class="mk">attentional momentum</span> during inference. The first
+				stage uses only visual cues; later stages also reuse the estimated speech from previous stages — so even when
+				visual cues are missing, MeMo keeps attention on the target speaker.</figcaption>
+			</figure>
 		</div>
-		<hr>
+	</section>
 
+	<!-- ===================== DATA ===================== -->
+	<section id="data">
+		<div class="wrap">
+			<div class="eyebrow">Benchmark</div>
+			<h2 class="section-title">Data Simulation</h2>
+			<p class="section-sub">We simulate realistic visual impairments and dynamic speaker-switching conversations
+			to stress-test robustness.</p>
 
-		<div class="demo-section">
-			<h1 class="center-content">Speech Separation Demo</h1>
-			<h3 class="demo-title">Normal Video</h3>
-			<table class="table table-hover pt-2">
-			<thread>
-				<tr>
-					<th style="text-align: center">Mixture</th>
-				</tr>
-			</thread>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample1/mix.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-		    </table>
-			<div class="comparison-table">
-				<div class="comparison-row">
-					<div class="comparison-cell">
-						<h4>Ground Truth1</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample1/id04862_eX3wAZ0yr7w_00261_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-					<div class="comparison-cell">
-						<h4>Ground Truth2</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample2/id08696_Cg9tYEiOCQA_00138_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-				</div>
-			</div>
-            <table class="table table-hover pt-2">
-			<thead>
-				<tr>
-					<th style="text-align: center">Estimate1</th>
-					<th style="text-align: center">Estimate2</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample1/00261_est.mp4" type="video/mp4">
-						</video>
-					</td>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample2/id08696_Cg9tYEiOCQA_00138_est.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-			</tbody>
-		    </table>
-            
-            <br>
-            <br>
-            <table class="table table-hover pt-2">
-			<thread>
-				<tr>
-					<th style="text-align: center">Mixture</th>
-				</tr>
-			</thread>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample3/mix.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-		    </table>
-			<div class="comparison-table">
-				<div class="comparison-row">
-					<div class="comparison-cell">
-						<h4>Ground Truth1</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample3/id03789_FErDFm0ZmYY_00138_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-					<div class="comparison-cell">
-						<h4>Ground Truth2</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample4/id02057_Y-MOxNRv6GM_00282_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-				</div>
-			</div>
-            <table class="table table-hover pt-2">
-			<thead>
-				<tr>
-					<th style="text-align: center">Estimate1</th>
-					<th style="text-align: center">Estimate2</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample3/00138_est.mp4" type="video/mp4">
-						</video>
-					</td>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample4/00282_est.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-			</tbody>
-		    </table>
+			<figure class="figure">
+				<img src="./images/data.jpg" alt="Visual impairment examples" />
+				<figcaption><b>Fig. 3:</b> Examples of visual impairments — visual missing, lip concealment, and low resolution
+				(Gaussian noise / blurring / down-sampling).</figcaption>
+			</figure>
 
-            <h3 class="demo-title">Impaired Video</h3>
-            <table class="table table-hover pt-2">
-			<thread>
-				<tr>
-					<th style="text-align: center">Mixture</th>
-				</tr>
-			</thread>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample5/mix2.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-		    </table>
-			<div class="comparison-table">
-				<div class="comparison-row">
-					<div class="comparison-cell">
-						<h4>Ground Truth1</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample5/id09017_X8FqYhoc2xU_00146_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-					<div class="comparison-cell">
-						<h4>Ground Truth2</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample6/id01989_xmusJBQwQEs_00168_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-				</div>
-			</div>
-            <table class="table table-hover pt-2">
-			<thead>
-				<tr>
-					<th style="text-align: center">Estimate1</th>
-					<th style="text-align: center">Estimate2</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample5/00146_est.mp4" type="video/mp4">
-						</video>
-					</td>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample6/00168_est.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-			</tbody>
-		    </table>
-            
-            <br>
-            <br>
-            <table class="table table-hover pt-2">
-			<thread>
-				<tr>
-					<th style="text-align: center">Mixture</th>
-				</tr>
-			</thread>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample7/mix3.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-		    </table>
-			<div class="comparison-table">
-				<div class="comparison-row">
-					<div class="comparison-cell">
-						<h4>Ground Truth1</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample8/id07354_DPDPVItsdg8_00138_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-					<div class="comparison-cell">
-						<h4>Ground Truth2</h4>
-						<audio controls class="audio-player">
-							<source src="clean_audios/sample7/id07426_gol32BfUJh4_00155_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-				</div>
-			</div>
-            <table class="table table-hover pt-2">
-			<thead>
-				<tr>
-					<th style="text-align: center">Estimate1</th>
-					<th style="text-align: center">Estimate2</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample8/00138_est2.mp4" type="video/mp4">
-						</video>
-					</td>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="clean_audios/sample7/00155_est.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-			</tbody>
-		    </table>
-
-            <h3 class="demo-title">Switch-video</h3>
-			<table class="table table-hover pt-2">
-			<thread>
-				<tr>
-					<th style="text-align: center">Mixture</th>
-				</tr>
-			</thread>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="switch_audio/switch.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-		    </table>
-			<div class="comparison-table">
-				<div class="comparison-row">
-					<div class="comparison-cell">
-						<h4>Ground Truth1</h4>
-						<audio controls class="audio-player">
-							<source src="switch_audio/id03524_Cqh4rBSoViA_00074_tgt.wav" type="audio/wav">
-							Your browser does not support the audio element.
-						</audio>
-					</div>
-				</div>
-			</div>
-            <table class="table table-hover pt-2">
-			<thead>
-				<tr>
-					<th style="text-align: center">Estimate1 MeMo</th>
-					<th style="text-align: center">Estimate1 TDSE</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="switch_audio/switch_est_memo.mp4" type="video/mp4">
-						</video>
-					</td>
-					<td style="text-align: center;vertical-align:middle;width: 730px">
-						<video controls style="width: 100%;">
-							<source src="switch_audio/switch_est_baseline.mp4" type="video/mp4">
-						</video>
-					</td>
-				</tr>
-			</tbody>
-		    </table>
-            
-
+			<figure class="figure">
+				<img src="./images/switch_new.jpg" alt="Target speaker switching" />
+				<figcaption><b>Fig. 4:</b> An example of target-speaker switching during a conversation. Attention shifts from one
+				target speaker to another at a certain point, while interfering speech and background noise persist.</figcaption>
+			</figure>
 		</div>
-		
-		
-	<!-- <center>
-		<a href="javascript:toggleblock('notice')" style="text-align:center;font-size:70%;color:#808080">▶ cslikai.cn's
-			clustrmaps 🌎</a>.
-		<div id="notice" style="display:none; color:#dedede; font-size:.5em;">
-			<p>
-				<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=XUY5Bbv-l4Negr0uiIqE4axKMGnlqBRBDKL5EpeE2LY&cl=ffffff&w=a"></script>
-			</p>
+	</section>
+
+	<!-- ===================== RESULTS ===================== -->
+	<section id="results">
+		<div class="wrap">
+			<div class="eyebrow">Experiments</div>
+			<h2 class="section-title">Results on Online Speech Separation</h2>
+			<p class="section-sub">MeMo delivers consistent gains across impairment types, ratios, backbones, and
+			speaker-switching scenarios.</p>
+
+			<figure class="figure">
+				<img src="./images/results1.jpg" alt="Contextual bank vs speaker bank" />
+				<figcaption>Comparative results between the <b>contextual bank</b> and the <b>speaker bank</b>.</figcaption>
+			</figure>
+
+			<figure class="figure">
+				<img src="./images/results3.jpg" alt="Comparison with other separation models" />
+				<figcaption>Performance comparison of <span class="mk">MeMo</span> against other existing separation models.</figcaption>
+			</figure>
+
+			<div class="grid grid-2" style="max-width:980px;margin:0 auto;">
+				<div class="card">
+					<img src="./images/results2.jpg" alt="Different impaired ratios" />
+					<div class="cap">Different systems across impaired ratios (online mode).</div>
+				</div>
+				<div class="card">
+					<img src="./images/results4.jpg" alt="Different visual impairments" />
+					<div class="cap">Performance under different visual impairments.</div>
+				</div>
+			</div>
+
+			<div style="max-width:480px;margin:24px auto 0;">
+				<div class="card">
+					<img src="./images/results5.jpg" alt="Switching dataset" />
+					<div class="cap">Performance under the speaker-switching dataset.</div>
+				</div>
+			</div>
 		</div>
-	</center>
-	<br> -->
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9617bb8b4a3c2409","version":"2025.7.0","r":1,"token":"88ac3f706bec40519da131bc0217ee68","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+	</section>
+
+	<!-- ===================== DEMO ===================== -->
+	<section id="demo">
+		<div class="wrap">
+			<div class="eyebrow">Listen</div>
+			<h2 class="section-title">Speech Separation Demo</h2>
+			<p class="section-sub">Watch the mixture, then compare the extracted target speakers. Best with headphones.</p>
+
+			<div class="demo-group">
+
+				<!-- ---------- Normal Video ---------- -->
+				<div class="demo-head"><span class="chip">Normal Video</span></div>
+
+				<div class="demo-card">
+					<div class="mixture-wrap">
+						<p class="media-label">Mixture</p>
+						<video controls><source src="clean_audios/sample1/mix.mp4" type="video/mp4"></video>
+					</div>
+					<div class="divider"></div>
+					<div class="row row-2">
+						<div class="subcell">
+							<h4>Ground Truth 1</h4>
+							<audio controls><source src="clean_audios/sample1/id04862_eX3wAZ0yr7w_00261_tgt.wav" type="audio/wav"></audio>
+						</div>
+						<div class="subcell">
+							<h4>Ground Truth 2</h4>
+							<audio controls><source src="clean_audios/sample2/id08696_Cg9tYEiOCQA_00138_tgt.wav" type="audio/wav"></audio>
+						</div>
+					</div>
+					<div class="row row-2" style="margin-top:16px;">
+						<div class="subcell">
+							<h4>Estimate 1 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample1/00261_est.mp4" type="video/mp4"></video>
+						</div>
+						<div class="subcell">
+							<h4>Estimate 2 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample2/id08696_Cg9tYEiOCQA_00138_est.mp4" type="video/mp4"></video>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo-card">
+					<div class="mixture-wrap">
+						<p class="media-label">Mixture</p>
+						<video controls><source src="clean_audios/sample3/mix.mp4" type="video/mp4"></video>
+					</div>
+					<div class="divider"></div>
+					<div class="row row-2">
+						<div class="subcell">
+							<h4>Ground Truth 1</h4>
+							<audio controls><source src="clean_audios/sample3/id03789_FErDFm0ZmYY_00138_tgt.wav" type="audio/wav"></audio>
+						</div>
+						<div class="subcell">
+							<h4>Ground Truth 2</h4>
+							<audio controls><source src="clean_audios/sample4/id02057_Y-MOxNRv6GM_00282_tgt.wav" type="audio/wav"></audio>
+						</div>
+					</div>
+					<div class="row row-2" style="margin-top:16px;">
+						<div class="subcell">
+							<h4>Estimate 1 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample3/00138_est.mp4" type="video/mp4"></video>
+						</div>
+						<div class="subcell">
+							<h4>Estimate 2 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample4/00282_est.mp4" type="video/mp4"></video>
+						</div>
+					</div>
+				</div>
+
+				<!-- ---------- Impaired Video ---------- -->
+				<div class="demo-head"><span class="chip">Impaired Video</span></div>
+
+				<div class="demo-card">
+					<div class="mixture-wrap">
+						<p class="media-label">Mixture</p>
+						<video controls><source src="clean_audios/sample5/mix2.mp4" type="video/mp4"></video>
+					</div>
+					<div class="divider"></div>
+					<div class="row row-2">
+						<div class="subcell">
+							<h4>Ground Truth 1</h4>
+							<audio controls><source src="clean_audios/sample5/id09017_X8FqYhoc2xU_00146_tgt.wav" type="audio/wav"></audio>
+						</div>
+						<div class="subcell">
+							<h4>Ground Truth 2</h4>
+							<audio controls><source src="clean_audios/sample6/id01989_xmusJBQwQEs_00168_tgt.wav" type="audio/wav"></audio>
+						</div>
+					</div>
+					<div class="row row-2" style="margin-top:16px;">
+						<div class="subcell">
+							<h4>Estimate 1 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample5/00146_est.mp4" type="video/mp4"></video>
+						</div>
+						<div class="subcell">
+							<h4>Estimate 2 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample6/00168_est.mp4" type="video/mp4"></video>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo-card">
+					<div class="mixture-wrap">
+						<p class="media-label">Mixture</p>
+						<video controls><source src="clean_audios/sample7/mix3.mp4" type="video/mp4"></video>
+					</div>
+					<div class="divider"></div>
+					<div class="row row-2">
+						<div class="subcell">
+							<h4>Ground Truth 1</h4>
+							<audio controls><source src="clean_audios/sample8/id07354_DPDPVItsdg8_00138_tgt.wav" type="audio/wav"></audio>
+						</div>
+						<div class="subcell">
+							<h4>Ground Truth 2</h4>
+							<audio controls><source src="clean_audios/sample7/id07426_gol32BfUJh4_00155_tgt.wav" type="audio/wav"></audio>
+						</div>
+					</div>
+					<div class="row row-2" style="margin-top:16px;">
+						<div class="subcell">
+							<h4>Estimate 1 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample8/00138_est2.mp4" type="video/mp4"></video>
+						</div>
+						<div class="subcell">
+							<h4>Estimate 2 (MeMo)</h4>
+							<video controls><source src="clean_audios/sample7/00155_est.mp4" type="video/mp4"></video>
+						</div>
+					</div>
+				</div>
+
+				<!-- ---------- Switch Video ---------- -->
+				<div class="demo-head"><span class="chip">Speaker Switching</span></div>
+
+				<div class="demo-card">
+					<div class="mixture-wrap">
+						<p class="media-label">Mixture</p>
+						<video controls><source src="switch_audio/switch.mp4" type="video/mp4"></video>
+						<div class="subcell" style="margin-top:14px;">
+							<h4>Ground Truth</h4>
+							<audio controls><source src="switch_audio/id03524_Cqh4rBSoViA_00074_tgt.wav" type="audio/wav"></audio>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row row-2">
+						<div class="subcell">
+							<h4>Estimate — MeMo</h4>
+							<video controls><source src="switch_audio/switch_est_memo.mp4" type="video/mp4"></video>
+						</div>
+						<div class="subcell">
+							<h4>Estimate — TDSE (baseline)</h4>
+							<video controls><source src="switch_audio/switch_est_baseline.mp4" type="video/mp4"></video>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ===================== FOOTER ===================== -->
+	<footer class="footer">
+		<div class="brand-f"><img src="./images/logo.png" alt="MeMo" /> MeMo</div>
+		<div>
+			<a href="https://arxiv.org/pdf/2507.15294">arXiv</a> &nbsp;·&nbsp;
+			<a href="https://github.com/mrjunjieli/MeMo">Code</a> &nbsp;·&nbsp;
+			<a href="https://mrjunjieli.github.io/">Project Author</a>
+		</div>
+		<div class="fnote">IEEE Transactions on Audio, Speech and Language Processing, 2026 · The Hong Kong Polytechnic University &amp; collaborators</div>
+	</footer>
+
 </body>
 
 </html>
